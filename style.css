@@ -171,58 +171,65 @@ header {
 /* スマホ向けの微調整 */
 @media (max-width: 768px) {
     .app-container {
-        flex-direction: column;
+        flex-direction: column; /* 画面を上下に分ける */
     }
 
     .controls-area {
-        flex-direction: column;
-        height: 35%;
+        flex-direction: column; /* 操作系を縦に積む */
+        height: 35%;           /* 画面の上部1/3を確保 */
         background: #fff;
         border-bottom: 2px solid #ccc;
+        overflow: hidden;      /* はみ出しを隠す */
     }
 
     .sidebar-left, .sidebar-right {
-        width: 100%;
-        height: auto;
-        flex-direction: row;
-        overflow-x: auto;
-        overflow-y: hidden;
+        width: 100% !important; /* 横幅いっぱいに使う */
+        height: 50% !important; /* 操作エリアを上下で半分ずつ */
+        flex-direction: row !important; /* 強制的に横並びにする */
+        overflow-x: auto;       /* 横スクロールを有効にする */
+        overflow-y: hidden;     /* 縦スクロールは不要 */
         padding: 5px;
         border: none;
         border-bottom: 1px solid #eee;
+        box-sizing: border-box;
     }
 
-    #button-container button {
+    /* 楽器ボタンを横一列に並べる */
+    #button-container {
         display: flex;
-        flex-direction: row;
-        gap: 8px;
-        /* font-size: 9px; */
+        flex-direction: row !important; 
+        gap: 10px;
+        padding-right: 20px; /* 最後のボタンが見切れないように */
     }
 
     #button-container button {
-        min-width: 60px;
-        height: 55px;
-        flex-shrink: 0;
+        min-width: 70px;       /* 押しやすい幅を確保 */
+        height: 60px;          /* 高さを固定 */
+        flex-shrink: 0;        /* ボタンが潰れるのを防ぐ（重要） */
+        font-size: 10px;
     }
 
+    /* 右側の設定・保存系も横並びに */
     .sidebar-right {
         display: flex;
-        justify-content: space-around;
+        justify-content: flex-start; /* 左詰めで横スクロール */
         align-items: center;
+        gap: 10px;
     }
 
     .setting-group, .action-group {
         display: flex;
-        gap: 5px;
+        gap: 8px;
+        flex-shrink: 0;        /* グループが潰れないように */
     }
 
-    .sidebar-right select, .sidebar-left button {
-        width: auto;
-        min-width: 44px;
-        height: 40px;
+    .sidebar-right select, .sidebar-right button, .sidebar-right input {
+        width: 60px !important; /* スマホでは幅を固定 */
+        height: 44px;
+        margin: 0;
     }
 
     #stage-container {
-        height: 65%;
+        height: 65%;           /* 残りの下部を舞台に */
     }
 }
