@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
 <body>
+    <header><h1>プルト表作成ツール</h1></header>
     <div class="app-container">
         <div class="controls-area">
             <aside class="sidebar-left">
@@ -22,14 +23,16 @@
                     <select id="sizeSelect">
                         <option value="30">小</option>
                         <option value="40" selected>中</option>
+                        <option value="50">大</option>
                     </select>
                 </div>
                 <div class="action-group">
                     <input type="color" id="colorPicker" value="#ffadad">
-                    <button onclick="changeColor()">🎨</button>
-                    <button onclick="deleteSelected()" class="delete-btn">🗑️</button>
-                    <button onclick="saveLayout()">💾</button>
-                    <button onclick="exportImage()">📸</button>
+                    <button onclick="changeColor()">色適用</button>
+                    <button onclick="selectAllItems()" title="全選択">全選択</button> 
+                    <button onclick="deleteSelected()" class="delete-btn">削除</button>
+                    <button onclick="saveLayout()">保存</button>
+                    <button onclick="exportImage()">画像保存</button>
                 </div>
             </aside>
         </div>

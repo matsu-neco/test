@@ -46,6 +46,8 @@ function addItem(type) {
     const data = INSTRUMENTS[type];
     const size = document.getElementById('sizeSelect').value;
     const div = document.createElement('div');
+    const fontSize = Math.floor(size / 2.5);
+
     div.className = 'item';
     div.style.width = size + 'px';
     div.style.height = size + 'px';
@@ -53,11 +55,12 @@ function addItem(type) {
     div.style.color = data.textColor || '#000';
     if (data.shape === 'circle') div.style.borderRadius = '50%';
     div.style.border = data.hasBorder ? "2px solid #333" : "none";
-    const fontSize = Math.floor(size / 2.5);
+    
     div.style.fontSize = fontSize + 'px';
     div.style.left = '40px'; 
     div.style.top = '40px';
-    div.innerHTML = `<span class="icon">${data.icon}</span><span class="label" style="display:none;"> </span>`;
+    div.innerHTML = `<span class="icon">${data.icon}</span>
+                    <span class="label" style="display:none;"> </span>`;
     
     setupItemEvents(div);
     stage.appendChild(div);
