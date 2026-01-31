@@ -1,0 +1,228 @@
+/* --- ベース設定：スクロールを禁止し全画面を使う --- */
+html, body { 
+    height: 100%;     
+    margin: 0; 
+    padding: 0; /* bodyのパディングを0にして端まで使う */
+    overflow: hidden;
+    font-family: sans-serif;
+    background-color: #f0f0f0;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.controls-area {
+    display: flex;
+    flex-direction: row;
+}
+
+/* ヘッダー：タイトルなど（必要なければ削除可） */
+header {
+    height: 30px;
+    background: #333;
+    color: white;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* メインレイアウト：3カラム構成 */
+.main-layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* --- サイドバー共通設定 --- */
+.sidebar-left, .sidebar-right {
+    width: 100px; 
+    background: #fff;
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    /* gap: 8px; */
+    padding: 10px 5px;
+    overflow-y: auto; /* ボタンが増えてもスクロール可能 */
+}
+
+/* 左サイドバー：楽器ボタンを縦に並べる */
+#button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+#button-container button {
+    display: flex;
+    flex-direction: column; /* アイコンと文字を上下に */
+    align-items: center;
+    justify-content: center;
+    padding: 10px 2px;
+    font-size: 10px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    cursor: pointer;
+    line-height: 1.2;
+}
+
+#button-container button span.btn-icon {
+    font-size: 18px; /* アイコンを大きく */
+    margin-bottom: 2px;
+}
+
+/* 右サイドバー：編集・保存系 */
+.sidebar-right {
+    background: #f9f9f9;
+}
+
+.sidebar-right select, 
+.sidebar-right button, 
+.sidebar-right input[type="color"] {
+    width: 100%;
+    height: 44px; /* タップしやすい高さ */
+    margin-bottom: 5px;
+    font-size: 12px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+/* --- 中央：舞台エリア --- */
+#stage-container {
+    flex: 1;
+    /* position: relative; */
+    background: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* padding: 10px; */
+}
+
+#stage {
+    width: 100%;
+    max-width: 900px;
+    aspect-ratio: 3 / 2;
+    background-color: white;
+    background-image: 
+        linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px), 
+        linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+    position: relative;
+    border: 1px solid #333;
+    overflow: hidden;
+    touch-action: none;
+}
+
+/* --- アイテム・ラベルのスタイル --- */
+.item { 
+    position: absolute; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    user-select: none; 
+    font-weight: bold; 
+    box-sizing: border-box; 
+    cursor: move;
+    z-index: 5;
+}
+
+.label { 
+    position: absolute; 
+    top: 105%; 
+    font-size: 11px; 
+    color: #333; 
+    background: rgba(255,255,255,0.8); 
+    padding: 1px 3px; 
+    border-radius: 3px; 
+    white-space: nowrap; 
+    pointer-events: none;
+}
+
+.selected { outline: 3px solid #007bff; z-index: 10 !important; }
+
+/* 舞台上のカウンタ表示 */
+#counter-display {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 5px 10px;
+    font-size: 11px;
+    border-radius: 4px;
+    pointer-events: none;
+    max-width: 80%;
+}
+
+/* ホール画像対応 */
+#stage.hhf {
+    background-image: url('hhf_pult.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+/* スマホ向けの微調整 */
+@media (max-width: 768px) {
+    .app-container {
+        flex-direction: column;
+    }
+
+    .controls-area {
+        flex-direction: column;
+        height: 35%;
+        background: #fff;
+        border-bottom: 2px solid #ccc;
+    }
+
+    .sidebar-left, .sidebar-right {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 5px;
+        border: none;
+        border-bottom: 1px solid #eee;
+    }
+
+    #button-container button {
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        /* font-size: 9px; */
+    }
+
+    #button-container button {
+        min-width: 60px;
+        height: 55px;
+        flex-shrink: 0;
+    }
+
+    .sidebar-right {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .setting-group, .action-group {
+        display: flex;
+        gap: 5px;
+    }
+
+    .sidebar-right select, .sidebar-left button {
+        width: auto;
+        min-width: 44px;
+        height: 40px;
+    }
+
+    #stage-container {
+        height: 65%;
+    }
+}

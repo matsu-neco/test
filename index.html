@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>プルト表作成ツール</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="controls-area">
+            <aside class="sidebar-left">
+                <div id="button-container"></div>
+            </aside>
+
+            <aside class="sidebar-right">
+                <div class="setting-group">
+                    <select id="hallSelect" onchange="changeHallBackground()">
+                        <option value="none">白紙</option>
+                        <option value="hhf">HHF</option>
+                    </select>
+                    <select id="sizeSelect">
+                        <option value="30">小</option>
+                        <option value="40" selected>中</option>
+                    </select>
+                </div>
+                <div class="action-group">
+                    <input type="color" id="colorPicker" value="#ffadad">
+                    <button onclick="changeColor()">🎨</button>
+                    <button onclick="deleteSelected()" class="delete-btn">🗑️</button>
+                    <button onclick="saveLayout()">💾</button>
+                    <button onclick="exportImage()">📸</button>
+                </div>
+            </aside>
+        </div>
+
+        <main id="stage-container">
+            <div id="stage"></div>
+            <div id="counter-display">準備完了</div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
